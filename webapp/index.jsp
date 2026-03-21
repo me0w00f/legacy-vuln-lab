@@ -27,7 +27,8 @@
         String user = (String) session.getAttribute("username");
         if (user != null) {
     %>
-        <a href="login/logout.jsp" style="float:right;">退出登录 (<%=user%>)</a>
+        <a href="login/logout.jsp" style="float:right;">退出登录</a>
+        <a href="profile/index.jsp" style="float:right;"><%=user%> 的信息</a>
     <%
         } else {
     %>

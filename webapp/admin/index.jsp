@@ -16,11 +16,11 @@
 
 <div class="navbar">
     <a href="../index.jsp">首页</a>
-    <a href="../schedule/index.jsp">课表查询</a>
-    <a href="../grades/index.jsp">成绩查询</a>
-    <a href="../notice/index.jsp">通知公告</a>
-    <a href="../upload/index.jsp">文件上传</a>
-    <a href="index.jsp" class="active">后台管理</a>
+    <a href="index.jsp" class="active">管理首页</a>
+    <a href="users.jsp">用户管理</a>
+    <a href="students.jsp">学生管理</a>
+    <a href="teachers.jsp">教师管理</a>
+    <a href="system.jsp">系统设置</a>
 </div>
 
 <div class="content">
