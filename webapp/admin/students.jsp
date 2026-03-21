@@ -31,7 +31,7 @@
     if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
 
     String role = (String) session.getAttribute("role");
-    if ("high".equals(difficulty) && !"admin".equals(role)) {
+    if (("high".equals(difficulty) || "impossible".equals(difficulty)) && !"admin".equals(role)) {
         out.println("<p class='error'>权限不足。</p>");
         return;
     }

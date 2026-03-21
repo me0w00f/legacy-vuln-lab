@@ -74,7 +74,7 @@
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(sql);
 
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 // HIGH: Parameterized query + output encoding
                 String sql = "SELECT * FROM schedules WHERE class=? ORDER BY weekday, period";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -84,7 +84,7 @@
 %>
             <% if ("low".equals(difficulty)) { %>
                 <p>查询结果：<b><%=className%></b> 的课程表</p>
-            <% } else { %>
+            <% } else { // HIGH + IMPOSSIBLE %>
                 <p>查询结果：<b><%=className.replace("<","&lt;").replace(">","&gt;")%></b> 的课程表</p>
             <% } %>
 
@@ -119,7 +119,7 @@
         } catch (Exception e) {
             if ("low".equals(difficulty)) {
                 out.println("<p class='error'>查询错误: " + e.getMessage() + "</p>");
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 out.println("<p class='error'>查询失败，请检查输入。</p>");
             }
         } finally {

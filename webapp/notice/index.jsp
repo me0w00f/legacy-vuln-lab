@@ -74,7 +74,7 @@
                 pstmt.executeUpdate();
                 pstmt.close();
 
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 // HIGH: Proper HTML encoding + parameterized query
                 title = title.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
                 content = content.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
@@ -139,7 +139,7 @@
                     <a href="view.jsp?id=<%=rs.getInt("id")%>">
                     <% if ("low".equals(difficulty)) { %>
                         <%=rs.getString("title")%>
-                    <% } else { %>
+                    <% } else { // HIGH + IMPOSSIBLE %>
                         <%=rs.getString("title").replace("<","&lt;").replace(">","&gt;")%>
                     <% } %>
                     </a>

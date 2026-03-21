@@ -14,7 +14,9 @@ CREATE TABLE users (
     password VARCHAR(50) NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'student',
     real_name VARCHAR(50),
-    created_at DATETIME
+    created_at DATETIME,
+    failed_attempts INT DEFAULT 0,
+    locked_until DATETIME
 );
 
 -- Students table

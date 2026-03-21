@@ -44,7 +44,7 @@
                 // LOW: SQL injection in id parameter
                 Statement stmt = conn.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM notices WHERE id=" + id);
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM notices WHERE id=?");
                 pstmt.setInt(1, Integer.parseInt(id));
                 rs = pstmt.executeQuery();
@@ -63,19 +63,19 @@
                         <%=rs.getString("content")%>
                     <% } else if ("medium".equals(difficulty)) { %>
                         <%=rs.getString("content").replaceAll("<script>","").replaceAll("</script>","")%>
-                    <% } else { %>
+                    <% } else { // HIGH + IMPOSSIBLE %>
                         <%=rs.getString("content").replace("<","&lt;").replace(">","&gt;")%>
                     <% } %>
                 </div>
 <%
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 out.println("<p class='error'>通知不存在。</p>");
             }
             rs.close();
         } catch (Exception e) {
             if ("low".equals(difficulty)) {
                 out.println("<p class='error'>错误: " + e.getMessage() + "</p>");
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 out.println("<p class='error'>加载通知失败。</p>");
             }
         } finally {

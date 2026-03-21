@@ -78,7 +78,7 @@
                 pstmt.setString(1, studentId);
                 rs = pstmt.executeQuery();
 
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 // HIGH: Requires login + ownership check (students can only see their own grades)
                 String loggedUser = (String) session.getAttribute("username");
                 String role = (String) session.getAttribute("role");
@@ -146,7 +146,7 @@
         } catch (Exception e) {
             if ("low".equals(difficulty)) {
                 out.println("<p class='error'>查询错误: " + e.getMessage() + "</p>");
-            } else {
+            } else { // HIGH + IMPOSSIBLE
                 out.println("<p class='error'>查询失败，请检查输入。</p>");
             }
         } finally {

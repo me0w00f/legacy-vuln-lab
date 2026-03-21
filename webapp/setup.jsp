@@ -76,6 +76,12 @@
                     <b>High</b> — 完整防御
                 </td>
             </tr>
+            <tr>
+                <td style="border: none; padding: 8px;">
+                    <input type="radio" name="difficulty" value="impossible" <%="impossible".equals(currentDifficulty) ? "checked" : ""%>>
+                    <b style="color: #8B0000;">Impossible</b> — 你试试看
+                </td>
+            </tr>
         </table>
         <br>
         <input type="submit" value="保存设置">
@@ -86,11 +92,12 @@
 
     <br>
     <p style="font-size: 11px; color: #999;">
-        当前安全级别：<b style="color: <%="low".equals(currentDifficulty) ? "red" : "medium".equals(currentDifficulty) ? "orange" : "green"%>;">
+        当前安全级别：<b style="color: <%="low".equals(currentDifficulty) ? "red" : "medium".equals(currentDifficulty) ? "orange" : "impossible".equals(currentDifficulty) ? "#8B0000" : "green"%>;">
         <%=currentDifficulty.toUpperCase()%></b><br><br>
         Low = 漏洞完全暴露，适合初学者<br>
         Medium = 有基本过滤，需要绕过技巧<br>
-        High = 接近真实防御，需要组合攻击
+        High = 接近真实防御，需要组合攻击<br>
+        <span style="color: #8B0000;">Impossible = 安全编码范例，无法攻破</span>
     </p>
 </div>
 

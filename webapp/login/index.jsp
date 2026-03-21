@@ -74,13 +74,69 @@
                     stmt = conn.createStatement();
                     rs = stmt.executeQuery(sql);
 
-                } else {
+                } else if ("high".equals(difficulty)) {
                     // HIGH: Parameterized query (proper defense)
                     String sql = "SELECT * FROM users WHERE username=? AND password=?";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setString(1, username);
                     pstmt.setString(2, password);
                     rs = pstmt.executeQuery();
+                } else {
+                    // IMPOSSIBLE: Parameterized + account lockout after 3 failed attempts
+                    // Check if account is locked
+                    PreparedStatement lockCheck = conn.prepareStatement(
+                        "SELECT failed_attempts, locked_until FROM users WHERE username=?");
+                    lockCheck.setString(1, username);
+                    ResultSet lockRs = lockCheck.executeQuery();
+                    if (lockRs.next()) {
+                        int attempts = lockRs.getInt("failed_attempts");
+                        java.sql.Timestamp lockedUntil = lockRs.getTimestamp("locked_until");
+                        if (lockedUntil != null && lockedUntil.after(new java.sql.Timestamp(System.currentTimeMillis()))) {
+                            errorMsg = "账户已锁定，请15分钟后再试。";
+                            lockRs.close();
+                            lockCheck.close();
+                        } else {
+                            lockRs.close();
+                            lockCheck.close();
+                            // Attempt login
+                            String sql = "SELECT * FROM users WHERE username=? AND password=?";
+                            PreparedStatement pstmt = conn.prepareStatement(sql);
+                            pstmt.setString(1, username);
+                            pstmt.setString(2, password);
+                            rs = pstmt.executeQuery();
+                            if (!rs.next()) {
+                                // Increment failed attempts
+                                PreparedStatement failStmt = conn.prepareStatement(
+                                    "UPDATE users SET failed_attempts = COALESCE(failed_attempts,0) + 1 WHERE username=?");
+                                failStmt.setString(1, username);
+                                failStmt.executeUpdate();
+                                failStmt.close();
+                                if (attempts >= 2) {
+                                    // Lock account for 15 minutes
+                                    PreparedStatement lockStmt = conn.prepareStatement(
+                                        "UPDATE users SET locked_until = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE username=?");
+                                    lockStmt.setString(1, username);
+                                    lockStmt.executeUpdate();
+                                    lockStmt.close();
+                                    errorMsg = "连续登录失败3次，账户已锁定15分钟。";
+                                } else {
+                                    errorMsg = "用户名或密码错误！剩余尝试次数：" + (2 - attempts);
+                                }
+                                rs = null;
+                            } else {
+                                // Reset failed attempts on success
+                                PreparedStatement resetStmt = conn.prepareStatement(
+                                    "UPDATE users SET failed_attempts = 0, locked_until = NULL WHERE username=?");
+                                resetStmt.setString(1, username);
+                                resetStmt.executeUpdate();
+                                resetStmt.close();
+                            }
+                        }
+                    } else {
+                        lockRs.close();
+                        lockCheck.close();
+                        errorMsg = "用户名或密码错误！";
+                    }
                 }
 
                 if (rs.next()) {

@@ -48,7 +48,7 @@
     if (uploadMsg != null) {
         if ("success".equals(uploadMsg)) {
             out.println("<p class='success'>文件上传成功！</p>");
-        } else {
+        } else { // HIGH + IMPOSSIBLE
             out.println("<p class='error'>上传失败: " + uploadMsg + "</p>");
         }
     }
@@ -91,7 +91,7 @@
             (客户端验证)
         </p>
 
-    <% } else { %>
+    <% } else { // HIGH + IMPOSSIBLE %>
         <!-- HIGH: Server-side whitelist + random filename + non-web directory -->
         <form method="POST" action="upload_handler.jsp?difficulty=high" enctype="multipart/form-data">
             选择文件：<input type="file" name="file"><br><br>
@@ -138,7 +138,7 @@
                 <td>
                     <% if ("low".equals(difficulty)) { %>
                         <a href="files/<%=rs.getString("filename")%>">下载</a>
-                    <% } else { %>
+                    <% } else { // HIGH + IMPOSSIBLE %>
                         <a href="download.jsp?id=<%=rs.getInt("id")%>">下载</a>
                     <% } %>
                 </td>
