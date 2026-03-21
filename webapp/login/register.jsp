@@ -27,6 +27,7 @@
     <h3>新用户注册</h3>
 
 <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%
 
         String errorMsg = "";
         String successMsg = "";

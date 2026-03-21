@@ -26,7 +26,7 @@
 <%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
 <%@ include file="/WEB-INF/difficulty.jsp" %>
-
+<%
     String id = request.getParameter("id");
     if (id != null) {
         Connection conn = null;
