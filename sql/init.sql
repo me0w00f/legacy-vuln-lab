@@ -11,7 +11,7 @@ CREATE TABLE users (
     password VARCHAR(50) NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'student',
     real_name VARCHAR(50),
-    created_at DATETIME DEFAULT NOW()
+    created_at DATETIME
 );
 
 -- Students table
@@ -60,7 +60,7 @@ CREATE TABLE uploads (
     filename VARCHAR(200) NOT NULL,
     filepath VARCHAR(500) NOT NULL,
     uploader VARCHAR(50),
-    upload_time DATETIME DEFAULT NOW()
+    upload_time DATETIME
 );
 
 -- ==========================================
