@@ -26,8 +26,7 @@
 <%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
 <% request.setCharacterEncoding("UTF-8"); %>
-<%
-    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%@ include file="/WEB-INF/difficulty.jsp" %>
 
 <div class="difficulty-bar">
     当前安全级别：<b><%= difficulty.toUpperCase() %></b>

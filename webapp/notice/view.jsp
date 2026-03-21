@@ -25,8 +25,7 @@
 
 <%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
-<%
-    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%@ include file="/WEB-INF/difficulty.jsp" %>
 
     String id = request.getParameter("id");
     if (id != null) {

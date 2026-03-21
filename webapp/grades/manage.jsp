@@ -26,8 +26,7 @@
 </div>
 
 <div class="content">
-<%
-    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%@ include file="/WEB-INF/difficulty.jsp" %>
 
     String role = (String) session.getAttribute("role");
 
