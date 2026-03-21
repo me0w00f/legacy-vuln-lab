@@ -63,8 +63,12 @@ C:\tomcat5.5\bin\startup.bat
 | 用户名 | 密码 | 角色 |
 |--------|------|------|
 | admin | goz123 | 管理员 |
-| teacher1 | 123456 | 教师 |
-| student1 | student1 | 学生 |
+| zhangsan | 123456 | 教师（语文·张三） |
+| lisi | 654321 | 教师（数学·李四） |
+| wuxiaoming | student1 | 学生（吴小明·高三1班） |
+| zhangxiaohong | student2 | 学生（张小红·高三1班） |
+
+> 系统内含 7 名教师、16 名学生、4 个班级的完整数据
 
 ## 📖 难度说明
 

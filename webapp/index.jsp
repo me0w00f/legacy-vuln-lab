@@ -18,6 +18,8 @@
     <a href="schedule/index.jsp">课表查询</a>
     <a href="grades/index.jsp">成绩查询</a>
     <a href="notice/index.jsp">通知公告</a>
+    <a href="schedule/manage.jsp">排课管理</a>
+    <a href="grades/manage.jsp">成绩录入</a>
     <a href="upload/index.jsp">文件上传</a>
     <a href="admin/index.jsp">后台管理</a>
     <a href="setup.jsp" style="color: #FFD700;">⚙ 安全设置</a>
