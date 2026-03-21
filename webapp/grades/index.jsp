@@ -37,8 +37,8 @@
 
 <h2>成绩查询</h2>
 
-<form method="GET" action="index.jsp">
-    <input type="hidden" name="difficulty" value="<%=difficulty%>">
+<% request.setCharacterEncoding("UTF-8"); %>
+<form method="POST" action="index.jsp">
     学号：<input type="text" name="student_id" value="<%=request.getParameter("student_id") != null ? request.getParameter("student_id") : ""%>" size="20">
     <input type="submit" value="查询">
 </form>

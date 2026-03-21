@@ -37,8 +37,8 @@
 
 <h2>课表查询</h2>
 
-<form method="GET" action="index.jsp">
-    <input type="hidden" name="difficulty" value="<%=difficulty%>">
+<% request.setCharacterEncoding("UTF-8"); %>
+<form method="POST" action="index.jsp">
     班级：<input type="text" name="class" value="<%=request.getParameter("class") != null ? request.getParameter("class") : ""%>" size="20">
     <input type="submit" value="查询">
 </form>

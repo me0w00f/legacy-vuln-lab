@@ -25,6 +25,7 @@
 </div>
 
 <div class="content">
+<% request.setCharacterEncoding("UTF-8"); %>
 <%
     // Get difficulty level
     String difficulty = (String) session.getAttribute("difficulty");

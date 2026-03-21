@@ -25,6 +25,7 @@
 
 <%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
+<% request.setCharacterEncoding("UTF-8"); %>
 <%
     String difficulty = (String) session.getAttribute("difficulty");
     if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }

@@ -21,6 +21,7 @@
 </div>
 
 <div class="content">
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <div class="form-box" style="width: 400px;">
     <h3>新用户注册</h3>
