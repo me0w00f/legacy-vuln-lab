@@ -17,7 +17,7 @@
     </context-param>
     <context-param>
         <param-name>db.password</param-name>
-        <param-value>root</param-value>
+        <param-value>goz123</param-value>
     </context-param>
 
     <welcome-file-list>
