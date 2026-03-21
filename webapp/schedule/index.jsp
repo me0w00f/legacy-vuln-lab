@@ -27,10 +27,6 @@
 <div class="content">
 <%
     <%@ include file="/WEB-INF/difficulty.jsp" %>
-<%
-    // difficulty loaded from database via include
-%>
-%>
 
 <div class="difficulty-bar">
     当前安全级别：<b><%= difficulty.toUpperCase() %></b>

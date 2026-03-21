@@ -27,9 +27,6 @@
 <div class="content">
 <%
     <%@ include file="/WEB-INF/difficulty.jsp" %>
-<%
-    // difficulty loaded from database via include
-%>
 
     String id = request.getParameter("id");
     if (id != null) {

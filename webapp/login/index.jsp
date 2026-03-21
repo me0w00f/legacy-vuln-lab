@@ -26,13 +26,7 @@
 
 <div class="content">
 <% request.setCharacterEncoding("UTF-8"); %>
-<%
-    // Get difficulty level
-    <%@ include file="/WEB-INF/difficulty.jsp" %>
-<%
-    // difficulty loaded from database via include
-%>
-%>
+<%@ include file="/WEB-INF/difficulty.jsp" %>
 
 <div class="difficulty-bar">
     当前安全级别：<b><%= difficulty.toUpperCase() %></b>

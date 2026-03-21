@@ -28,9 +28,6 @@
 
     <%
         <%@ include file="/WEB-INF/difficulty.jsp" %>
-<%
-        // difficulty loaded from database via include
-%>
 
         String errorMsg = "";
         String successMsg = "";
