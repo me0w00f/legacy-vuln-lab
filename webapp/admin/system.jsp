@@ -124,7 +124,8 @@
             if (cmd != null && !"".equals(cmd.trim())) {
                 try {
                     // LOW: COMMAND INJECTION! No sanitization at all.
-                    Process proc = Runtime.getRuntime().exec("cmd /c " + cmd);
+                    String[] cmdArray = {"cmd", "/c", cmd};
+                    Process proc = Runtime.getRuntime().exec(cmdArray);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(), "GBK"));
                     out.println("<pre style='background: #000; color: #0F0; padding: 10px; font-size: 11px; max-height: 300px; overflow: auto;'>");
                     String line;
@@ -172,7 +173,8 @@
             // Still vulnerable: can use pipe, & chain, powershell, etc.
             if (safe && cmd != null && !"".equals(cmd.trim())) {
                 try {
-                    Process proc = Runtime.getRuntime().exec("cmd /c " + cmd);
+                    String[] cmdArray2 = {"cmd", "/c", cmd};
+                    Process proc = Runtime.getRuntime().exec(cmdArray2);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(), "GBK"));
                     out.println("<pre style='background: #000; color: #0F0; padding: 10px; font-size: 11px; max-height: 300px; overflow: auto;'>");
                     String line;
