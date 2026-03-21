@@ -20,6 +20,7 @@
     <a href="notice/index.jsp">通知公告</a>
     <a href="upload/index.jsp">文件上传</a>
     <a href="admin/index.jsp">后台管理</a>
+    <a href="setup.jsp" style="color: #FFD700;">⚙ 安全设置</a>
     <%
         String user = (String) session.getAttribute("username");
         if (user != null) {

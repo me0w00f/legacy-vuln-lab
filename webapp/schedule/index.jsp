@@ -25,15 +25,13 @@
 
 <div class="content">
 <%
-    String difficulty = request.getParameter("difficulty");
-    if (difficulty == null) difficulty = "low";
+    String difficulty = (String) session.getAttribute("difficulty");
+    if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
 %>
 
 <div class="difficulty-bar">
-    难度级别：
-    <a href="?difficulty=low" class="<%="low".equals(difficulty)?"current":""%>">Low</a>
-    <a href="?difficulty=medium" class="<%="medium".equals(difficulty)?"current":""%>">Medium</a>
-    <a href="?difficulty=high" class="<%="high".equals(difficulty)?"current":""%>">High</a>
+    当前安全级别：<b><%= difficulty.toUpperCase() %></b>
+    | <a href="../setup.jsp">修改设置</a>
 </div>
 
 <h2>课表查询</h2>

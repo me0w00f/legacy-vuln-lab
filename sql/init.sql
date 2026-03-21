@@ -1,7 +1,10 @@
 -- Legacy Vuln Lab - Database Initialization
 -- Goz High School Educational Management System v2.0
 
-CREATE DATABASE IF NOT EXISTS goz_school DEFAULT CHARACTER SET utf8;
+SET NAMES utf8;
+
+DROP DATABASE IF EXISTS goz_school;
+CREATE DATABASE goz_school DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE goz_school;
 
 -- Users table (plaintext passwords, as is tradition)

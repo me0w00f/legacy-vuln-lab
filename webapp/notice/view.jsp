@@ -25,8 +25,8 @@
 
 <div class="content">
 <%
-    String difficulty = request.getParameter("difficulty");
-    if (difficulty == null) difficulty = "low";
+    String difficulty = (String) session.getAttribute("difficulty");
+    if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
 
     String id = request.getParameter("id");
     if (id != null) {
@@ -84,7 +84,7 @@
 %>
 
 <br>
-<a href="index.jsp?difficulty=<%=difficulty%>">&laquo; 返回公告列表</a>
+<a href="index.jsp">&laquo; 返回公告列表</a>
 
 </div>
 

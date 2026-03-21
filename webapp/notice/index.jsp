@@ -25,15 +25,13 @@
 
 <div class="content">
 <%
-    String difficulty = request.getParameter("difficulty");
-    if (difficulty == null) difficulty = "low";
+    String difficulty = (String) session.getAttribute("difficulty");
+    if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
 %>
 
 <div class="difficulty-bar">
-    难度级别：
-    <a href="?difficulty=low" class="<%="low".equals(difficulty)?"current":""%>">Low</a>
-    <a href="?difficulty=medium" class="<%="medium".equals(difficulty)?"current":""%>">Medium</a>
-    <a href="?difficulty=high" class="<%="high".equals(difficulty)?"current":""%>">High</a>
+    当前安全级别：<b><%= difficulty.toUpperCase() %></b>
+    | <a href="../setup.jsp">修改设置</a>
 </div>
 
 <h2>通知公告</h2>
@@ -99,7 +97,7 @@
 <!-- Post new notice form -->
 <div style="background: #FFFFF0; border: 1px solid #DDD; padding: 10px; margin-bottom: 15px;">
     <h3 style="font-size: 12px; color: #1B5FAA;">发布新通知</h3>
-    <form method="POST" action="index.jsp?difficulty=<%=difficulty%>">
+    <form method="POST" action="index.jsp">
         标题：<input type="text" name="title" size="50"><br><br>
         内容：<br>
         <textarea name="content" rows="5" cols="60" style="font-family: 宋体; font-size: 12px;"></textarea><br><br>
@@ -136,7 +134,7 @@
             <tr>
                 <td><%=idx%></td>
                 <td align="left">
-                    <a href="view.jsp?id=<%=rs.getInt("id")%>&difficulty=<%=difficulty%>">
+                    <a href="view.jsp?id=<%=rs.getInt("id")%>">
                     <% if ("low".equals(difficulty)) { %>
                         <%=rs.getString("title")%>
                     <% } else { %>
