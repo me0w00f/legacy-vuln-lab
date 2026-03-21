@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,33 +28,49 @@
 <div class="content">
 
 <%
-    String currentDifficulty = (String) session.getAttribute("difficulty");
-    if (currentDifficulty == null) {
-        currentDifficulty = "low";
-        session.setAttribute("difficulty", currentDifficulty);
-    }
+    // Read current difficulty from database
+    String currentDifficulty = "low";
+    Connection setupConn = null;
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        String dbUrl = application.getInitParameter("db.url");
+        String dbUser = application.getInitParameter("db.user");
+        String dbPass = application.getInitParameter("db.password");
+        setupConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
-    String role = (String) session.getAttribute("role");
-    boolean isAdmin = "admin".equals(role);
-
-    // Only admin can change difficulty
-    String newDifficulty = request.getParameter("difficulty");
-    if (newDifficulty != null) {
-        if (isAdmin) {
-            session.setAttribute("difficulty", newDifficulty);
-            currentDifficulty = newDifficulty;
-        } else {
-            out.println("<p class='error'>权限不足，仅管理员可修改安全级别。</p>");
+        Statement readStmt = setupConn.createStatement();
+        ResultSet readRs = readStmt.executeQuery("SELECT setting_value FROM settings WHERE setting_key='difficulty'");
+        if (readRs.next()) {
+            currentDifficulty = readRs.getString("setting_value");
         }
-    }
+        readRs.close();
+        readStmt.close();
+
+        String role = (String) session.getAttribute("role");
+        boolean isAdmin = "admin".equals(role);
+
+        // Handle update
+        String newDifficulty = request.getParameter("difficulty");
+        if (newDifficulty != null) {
+            if (isAdmin) {
+                PreparedStatement updateStmt = setupConn.prepareStatement(
+                    "UPDATE settings SET setting_value=? WHERE setting_key='difficulty'");
+                updateStmt.setString(1, newDifficulty);
+                updateStmt.executeUpdate();
+                updateStmt.close();
+                currentDifficulty = newDifficulty;
+                out.println("<div class='form-box' style='width: 450px;'><p class='success'>安全级别已设置为：<b>" + currentDifficulty.toUpperCase() + "</b></p></div><br>");
+            } else {
+                out.println("<div class='form-box' style='width: 450px;'><p class='error'>权限不足，仅管理员可修改安全级别。</p></div><br>");
+            }
+        }
+
+        // Update session
+        session.setAttribute("difficulty", currentDifficulty);
 %>
 
 <div class="form-box" style="width: 450px;">
     <h3>安全级别设置</h3>
-
-    <% if (newDifficulty != null) { %>
-        <p class="success">安全级别已设置为：<b><%=currentDifficulty.toUpperCase()%></b></p>
-    <% } %>
 
     <% if (isAdmin) { %>
     <form method="POST" action="setup.jsp">
@@ -100,6 +117,14 @@
         <span style="color: #8B0000;">Impossible = 安全编码范例，无法攻破</span>
     </p>
 </div>
+
+<%
+    } catch (Exception e) {
+        out.println("<p class='error'>数据库连接失败: " + e.getMessage() + "</p>");
+    } finally {
+        try { if (setupConn != null) setupConn.close(); } catch(Exception e) {}
+    }
+%>
 
 </div>
 

@@ -27,8 +27,10 @@
 
 <div class="content">
 <%
-    String difficulty = (String) session.getAttribute("difficulty");
-    if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
+    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%
+    // difficulty loaded from database via include
+%>
 
     String loggedUser = (String) session.getAttribute("username");
     String role = (String) session.getAttribute("role");

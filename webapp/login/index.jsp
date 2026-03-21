@@ -28,8 +28,10 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
     // Get difficulty level
-    String difficulty = (String) session.getAttribute("difficulty");
-    if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
+    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%
+    // difficulty loaded from database via include
+%>
 %>
 
 <div class="difficulty-bar">

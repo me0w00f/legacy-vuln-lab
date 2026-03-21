@@ -5,7 +5,8 @@
     // Simple multipart parser for Tomcat 5.5 (no commons-fileupload needed)
     // Reads raw input stream and parses multipart/form-data manually
 
-    String difficulty = (String) session.getAttribute("difficulty");
+    <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%
     if (difficulty == null) difficulty = "low";
 
     String contentType = request.getContentType();

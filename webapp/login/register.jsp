@@ -27,8 +27,10 @@
     <h3>新用户注册</h3>
 
     <%
-        String difficulty = (String) session.getAttribute("difficulty");
-        if (difficulty == null) { difficulty = "low"; session.setAttribute("difficulty", difficulty); }
+        <%@ include file="/WEB-INF/difficulty.jsp" %>
+<%
+        // difficulty loaded from database via include
+%>
 
         String errorMsg = "";
         String successMsg = "";

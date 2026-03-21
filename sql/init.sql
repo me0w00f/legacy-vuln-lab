@@ -79,6 +79,15 @@ CREATE TABLE uploads (
     upload_time DATETIME
 );
 
+-- Settings table (persistent config)
+CREATE TABLE settings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    setting_key VARCHAR(50) NOT NULL,
+    setting_value VARCHAR(200) NOT NULL
+);
+
+INSERT INTO settings (setting_key, setting_value) VALUES ('difficulty', 'low');
+
 -- ==========================================
 -- Users (plaintext passwords!)
 -- ==========================================
