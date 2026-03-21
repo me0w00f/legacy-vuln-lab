@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.io.*, java.util.*" %>
 <%@ include file="/WEB-INF/auth_check.jsp" %>
-<%
-    // Simple multipart parser for Tomcat 5.5 (no commons-fileupload needed)
-    // Reads raw input stream and parses multipart/form-data manually
-
+<%-- Simple multipart parser for Tomcat 5.5 (no commons-fileupload needed) --%>
+<%-- Reads raw input stream and parses multipart/form-data manually --%>
 <%@ include file="/WEB-INF/difficulty.jsp" %>
 <%
     if (difficulty == null) difficulty = "low";
