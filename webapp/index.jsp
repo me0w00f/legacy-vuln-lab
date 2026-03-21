@@ -3,13 +3,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>某某高中教务管理系统</title>
+<title>狗子高中教务管理系统</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="header">
-    <h1>某某高中教务管理系统 v2.0</h1>
+    <h1>狗子高中教务管理系统 v2.0</h1>
     <span class="subtitle">Goz High School Educational Management System</span>
 </div>
 

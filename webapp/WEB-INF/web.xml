@@ -4,7 +4,7 @@
 
 <web-app>
     <display-name>Goz High School Educational Management System</display-name>
-    <description>某某高中教务管理系统 v2.0</description>
+    <description>狗子高中教务管理系统 v2.0</description>
 
     <!-- Database Configuration (change these for your environment) -->
     <context-param>
