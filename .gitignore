@@ -1,0 +1,8 @@
+*.class
+*.war
+*.jar
+*.log
+.DS_Store
+Thumbs.db
+webapp/upload/files/*
+!webapp/upload/files/.gitkeep
