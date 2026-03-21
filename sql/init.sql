@@ -51,7 +51,7 @@ CREATE TABLE notices (
     title VARCHAR(200) NOT NULL,
     content TEXT,
     author VARCHAR(50),
-    created_at DATETIME DEFAULT NOW()
+    created_at DATETIME
 );
 
 -- Uploaded files table
