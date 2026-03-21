@@ -23,19 +23,28 @@
     <a href="setup.jsp" class="active" style="float:right;">安全设置</a>
 </div>
 
+<%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
 
 <%
-    // Handle form submission
-    String newDifficulty = request.getParameter("difficulty");
-    if (newDifficulty != null) {
-        session.setAttribute("difficulty", newDifficulty);
-    }
-
     String currentDifficulty = (String) session.getAttribute("difficulty");
     if (currentDifficulty == null) {
         currentDifficulty = "low";
         session.setAttribute("difficulty", currentDifficulty);
+    }
+
+    String role = (String) session.getAttribute("role");
+    boolean isAdmin = "admin".equals(role);
+
+    // Only admin can change difficulty
+    String newDifficulty = request.getParameter("difficulty");
+    if (newDifficulty != null) {
+        if (isAdmin) {
+            session.setAttribute("difficulty", newDifficulty);
+            currentDifficulty = newDifficulty;
+        } else {
+            out.println("<p class='error'>权限不足，仅管理员可修改安全级别。</p>");
+        }
     }
 %>
 
@@ -46,6 +55,7 @@
         <p class="success">安全级别已设置为：<b><%=currentDifficulty.toUpperCase()%></b></p>
     <% } %>
 
+    <% if (isAdmin) { %>
     <form method="POST" action="setup.jsp">
         <table width="100%" style="border: none;">
             <tr>
@@ -70,6 +80,9 @@
         <br>
         <input type="submit" value="保存设置">
     </form>
+    <% } else { %>
+    <p style="color: #999;">仅管理员可修改安全级别。请联系管理员。</p>
+    <% } %>
 
     <br>
     <p style="font-size: 11px; color: #999;">
