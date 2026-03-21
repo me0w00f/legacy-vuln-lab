@@ -35,25 +35,25 @@
 </div>
 
 <%
+    // All levels require login
+    String loggedUser = (String) session.getAttribute("username");
+    String role = (String) session.getAttribute("role");
+    if (loggedUser == null) {
+        response.sendRedirect("../login/index.jsp");
+        return;
+    }
+
     if ("low".equals(difficulty)) {
-        // LOW: No authentication check at all - anyone can access admin panel
+        // LOW: Requires login but no role check - any user can access admin panel
     } else if ("medium".equals(difficulty)) {
-        // MEDIUM: Checks if logged in, but doesn't check role
-        String loggedUser = (String) session.getAttribute("username");
-        if (loggedUser == null) {
-            out.println("<p class='error'>请先登录。</p>");
-            out.println("<p><a href='../login/index.jsp?difficulty=" + difficulty + "'>去登录</a></p>");
+        // MEDIUM: Checks role but with bypassable cookie/parameter check
+        // (student can still access by manipulating session in some scenarios)
+        if (!"admin".equals(role) && !"teacher".equals(role)) {
+            out.println("<p class='error'>权限不足，仅教师和管理员可访问。</p>");
             return;
         }
     } else {
-        // HIGH: Checks login + admin role
-        String loggedUser = (String) session.getAttribute("username");
-        String role = (String) session.getAttribute("role");
-        if (loggedUser == null) {
-            out.println("<p class='error'>请先登录。</p>");
-            out.println("<p><a href='../login/index.jsp?difficulty=" + difficulty + "'>去登录</a></p>");
-            return;
-        }
+        // HIGH: Strict admin-only check
         if (!"admin".equals(role)) {
             out.println("<p class='error'>权限不足，仅管理员可访问。</p>");
             return;

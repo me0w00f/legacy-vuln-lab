@@ -23,6 +23,7 @@
     <a href="../admin/index.jsp">后台管理</a>
 </div>
 
+<%@ include file="/WEB-INF/auth_check.jsp" %>
 <div class="content">
 <%
     String difficulty = (String) session.getAttribute("difficulty");

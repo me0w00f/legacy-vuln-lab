@@ -121,6 +121,7 @@
     </form>
 
     <p style="font-size: 11px; color: #999; margin-top: 10px; text-align: center;">
+        没有账号？<a href="register.jsp">注册新用户</a><br><br>
         默认管理员账号：admin<br>
         如忘记密码请联系信息中心
     </p>
