@@ -58,7 +58,7 @@
 
     <% if ("low".equals(difficulty)) { %>
         <!-- LOW: No file type check, no size limit, uploaded to web-accessible directory -->
-        <form method="POST" action="upload_handler.jsp?difficulty=low" enctype="multipart/form-data">
+        <form method="POST" action="upload_handler.jsp" enctype="multipart/form-data">
             选择文件：<input type="file" name="file"><br><br>
             <input type="submit" value="上传文件">
         </form>
@@ -69,7 +69,7 @@
 
     <% } else if ("medium".equals(difficulty)) { %>
         <!-- MEDIUM: Client-side JS check only (bypassable) -->
-        <form method="POST" action="upload_handler.jsp?difficulty=medium" enctype="multipart/form-data"
+        <form method="POST" action="upload_handler.jsp" enctype="multipart/form-data"
               onsubmit="return checkFile();">
             选择文件：<input type="file" name="file" id="fileInput"><br><br>
             <input type="submit" value="上传文件">
@@ -93,7 +93,7 @@
 
     <% } else { // HIGH + IMPOSSIBLE %>
         <!-- HIGH: Server-side whitelist + random filename + non-web directory -->
-        <form method="POST" action="upload_handler.jsp?difficulty=high" enctype="multipart/form-data">
+        <form method="POST" action="upload_handler.jsp" enctype="multipart/form-data">
             选择文件：<input type="file" name="file"><br><br>
             <input type="submit" value="上传文件">
         </form>

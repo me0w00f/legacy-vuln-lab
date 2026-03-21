@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +47,32 @@
             <td width="50%" valign="top" style="padding: 10px;">
                 <h3 style="color: #1B5FAA; font-size: 13px;">📢 最新通知</h3>
                 <ul class="notice-list">
-                    <li><a href="notice/view.jsp?id=3">系统维护通知</a> <span class="date">[2009-11-05]</span></li>
-                    <li><a href="notice/view.jsp?id=2">期中考试安排</a> <span class="date">[2009-10-28]</span></li>
-                    <li><a href="notice/view.jsp?id=1">关于2009年秋季运动会的通知</a> <span class="date">[2009-09-20]</span></li>
+                <%
+                    Connection homeConn = null;
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        String dbUrl = application.getInitParameter("db.url");
+                        String dbUser = application.getInitParameter("db.user");
+                        String dbPass = application.getInitParameter("db.password");
+                        homeConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+                        Statement homeStmt = homeConn.createStatement();
+                        ResultSet homeRs = homeStmt.executeQuery("SELECT id, title, created_at FROM notices ORDER BY created_at DESC LIMIT 5");
+                        while (homeRs.next()) {
+                            String title = homeRs.getString("title").replace("<","&lt;").replace(">","&gt;");
+                            java.sql.Timestamp ts = homeRs.getTimestamp("created_at");
+                            String dateStr = ts != null ? ts.toString().substring(0, 10) : "";
+                %>
+                    <li><a href="notice/view.jsp?id=<%=homeRs.getInt("id")%>"><%=title%></a> <span class="date">[<%=dateStr%>]</span></li>
+                <%
+                        }
+                        homeRs.close();
+                        homeStmt.close();
+                    } catch (Exception e) {
+                        out.println("<li>通知加载失败</li>");
+                    } finally {
+                        try { if (homeConn != null) homeConn.close(); } catch(Exception e) {}
+                    }
+                %>
                 </ul>
             </td>
             <td width="50%" valign="top" style="padding: 10px;">
