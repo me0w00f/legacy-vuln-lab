@@ -58,11 +58,11 @@
                 <hr style="border: none; border-top: 1px dashed #CCC;">
                 <div style="padding: 10px; line-height: 1.8; font-size: 12px;">
                     <% if ("low".equals(difficulty)) { %>
-                        <%=rs.getString("content")%>
+                        <%=rs.getString("content").replace("\\n","<br>")%>
                     <% } else if ("medium".equals(difficulty)) { %>
-                        <%=rs.getString("content").replaceAll("<script>","").replaceAll("</script>","")%>
+                        <%=rs.getString("content").replace("\\n","<br>").replaceAll("<script>","").replaceAll("</script>","")%>
                     <% } else { // HIGH + IMPOSSIBLE %>
-                        <%=rs.getString("content").replace("<","&lt;").replace(">","&gt;")%>
+                        <%=rs.getString("content").replace("<","&lt;").replace(">","&gt;").replace("\\n","<br>")%>
                     <% } %>
                 </div>
 <%
